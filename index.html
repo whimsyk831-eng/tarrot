@@ -1,0 +1,137 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Tarot Lux - タロット占い</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-a" aria-hidden="true"></div>
+  <div class="bg-orb orb-b" aria-hidden="true"></div>
+  <div class="bg-orb orb-c" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="sigil" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">Tarot Lux</div>
+        <div class="brand-sub">神秘を、上質に。</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnDaily" class="btn btn-ghost" type="button">今日の1枚</button>
+      <button id="btnClearHistory" class="btn btn-ghost" type="button">履歴を消す</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel hero">
+      <div class="hero-left">
+        <h1 class="h1">あなたの問いに、カードが答える。</h1>
+        <p class="lead">ワンカード、または3枚展開（過去・現在・未来）。正位置 / 逆位置も反映。</p>
+
+        <div class="controls">
+          <label class="field">
+            <span class="field-label">質問（任意）</span>
+            <input id="question" class="input" placeholder="例：転職、恋愛、今月の流れ…" maxlength="80" />
+          </label>
+
+          <div class="row">
+            <label class="field">
+              <span class="field-label">スプレッド</span>
+              <div class="seg" role="tablist" aria-label="Spread">
+                <button class="seg-btn is-active" data-spread="1" type="button" role="tab" aria-selected="true">1枚</button>
+                <button class="seg-btn" data-spread="3" type="button" role="tab" aria-selected="false">3枚</button>
+              </div>
+            </label>
+
+            <label class="field">
+              <span class="field-label">逆位置</span>
+              <div class="toggle">
+                <input id="toggleReversed" type="checkbox" checked />
+                <span class="toggle-ui" aria-hidden="true"></span>
+                <span class="toggle-text">有効</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="cta">
+            <button id="btnDraw" class="btn btn-primary" type="button">
+              <span class="spark" aria-hidden="true"></span>
+              シャッフルして引く
+            </button>
+            <button id="btnRedraw" class="btn btn-ghost" type="button" disabled>引き直す</button>
+            <button id="btnCopy" class="btn btn-ghost" type="button" disabled>結果をコピー</button>
+          </div>
+
+          <div class="hint">
+            <span class="dot" aria-hidden="true"></span>
+            カードは大アルカナ22枚で占います
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="altar">
+          <div class="altar-top">
+            <div class="altar-badge">RITUAL MODE</div>
+            <div class="altar-mini">静かに、深呼吸してから</div>
+          </div>
+          <div class="altar-mid">
+            <div class="mock-cards" aria-hidden="true">
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
+            </div>
+          </div>
+          <div class="altar-bottom">
+            <div class="stat">
+              <div class="stat-num" id="statCount">0</div>
+              <div class="stat-label">引いた回数</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" id="statLast">--</div>
+              <div class="stat-label">最終リーディング</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel results">
+      <div class="panel-head">
+        <h2 class="h2">リーディング</h2>
+        <div class="panel-sub" id="readingMeta">まだカードを引いていません</div>
+      </div>
+
+      <div id="cards" class="cards" aria-live="polite"></div>
+
+      <div id="meaning" class="meaning" hidden>
+        <div class="meaning-head">
+          <div class="meaning-title">メッセージ</div>
+          <div class="meaning-sub" id="meaningSub"></div>
+        </div>
+        <div id="meaningBody" class="meaning-body"></div>
+      </div>
+    </section>
+
+    <section class="panel history">
+      <div class="panel-head">
+        <h2 class="h2">履歴</h2>
+        <div class="panel-sub">直近10件を保存します（このブラウザのみ）</div>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-note">Tarot Lux / for personal guidance</div>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
